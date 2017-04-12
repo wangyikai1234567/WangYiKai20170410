@@ -13,31 +13,27 @@ import java.util.List;
  */
 
 public class MyPgaerAdapter extends FragmentPagerAdapter {
-    //添加fragment的集合
-    private List<Fragment> mFragmentList;
-    //添加标题的集合
-    private List<String> mTilteLis;
+    private List<MyTitleBean.ResultBean.DateBean> mTilteLis;
 
-    public MyPgaerAdapter(FragmentManager fm, List<Fragment> fragmentList, List<String> tilteLis) {
+    public MyPgaerAdapter(FragmentManager fm, List<MyTitleBean.ResultBean.DateBean> tilteLis) {
         super(fm);
-        mFragmentList = fragmentList;
         mTilteLis = tilteLis;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return mFragmentList.get(position);
+       Fragment fragment=MyFragment.newInstance(mTilteLis.get(position).getUri());
+        return fragment;
     }
 
     @Override
     public int getCount() {
-        return mFragmentList.size();
+        return mTilteLis.size();
     }
 
     //获取标题
     @Override
     public CharSequence getPageTitle(int position) {
-
-        return mTilteLis.get(position);
+        return mTilteLis.get(position).getTitle();
     }
 }
